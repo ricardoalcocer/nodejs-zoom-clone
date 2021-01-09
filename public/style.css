@@ -15,7 +15,7 @@
 
 .main__videos {
     flex-grow: 1;
-    background-color: black;
+    background-color: #f6bb33;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +23,7 @@
 }
 
 .main__controls {
-    background-color: #1C1E20;
+    background-color: #f6bb33;
 }
 
 .main__right {
@@ -32,7 +32,7 @@
 }
 
 .main__controls {
-    color: #D2D2D2;
+    color: #db57a0;
     display: flex;
     justify-content: space-between;
     padding: 5px;

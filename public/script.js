@@ -1,23 +1,27 @@
-const socket = io('/')
-const videoGrid = document.getElementById('video-grid')
-const myPeer = new Peer(undefined, {
+const socket      =  io('/')
+const videoGrid   = document.getElementById('video-grid')
+const myPeer      = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
-  port: '443'
+  port: '443' // for local use 3030
 })
+
 let myVideoStream;
-const myVideo = document.createElement('video')
-myVideo.muted = true;
+const myVideo     = document.createElement('video')
+
+
+myVideo.muted     = true;
 const peers = {}
+
 navigator.mediaDevices.getUserMedia({
   video: true,
   audio: true
 }).then(stream => {
-  myVideoStream = stream;
+  myVideoStream   = stream;
   addVideoStream(myVideo, stream)
   myPeer.on('call', call => {
     call.answer(stream)
-    const video = document.createElement('video')
+    const video   = document.createElement('video')
     call.on('stream', userVideoStream => {
       addVideoStream(video, userVideoStream)
     })
@@ -27,7 +31,7 @@ navigator.mediaDevices.getUserMedia({
     connectToNewUser(userId, stream)
   })
   // input value
-  let text = $("input");
+  let text        = $("input");
   // when press enter send message
   $('html').keydown(function (e) {
     if (e.which == 13 && text.val().length !== 0) {
@@ -40,6 +44,7 @@ navigator.mediaDevices.getUserMedia({
     scrollToBottom()
   })
 })
+
 
 socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
